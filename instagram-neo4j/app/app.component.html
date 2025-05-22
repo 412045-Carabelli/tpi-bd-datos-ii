@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="#">InstaClone Neo4j</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/publicaciones" routerLinkActive="active">Publicaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/publicaciones/new" routerLinkActive="active">Nueva Publicación</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer class="bg-light text-center text-muted py-3 mt-5">
+  <div class="container">
+    <p class="mb-0">InstaClone Neo4j &copy; 2023</p>
+  </div>
+</footer>
