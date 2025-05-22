@@ -1,0 +1,59 @@
+// Crear algunos usuarios
+CREATE (u1:Usuario {id: 1, nombre: "gino_carabelli"})
+CREATE (u2:Usuario {id: 2, nombre: "luca.casamayor"})
+CREATE (u3:Usuario {id: 3, nombre: "fedeponceleon"})
+CREATE (u4:Usuario {id: 4, nombre: "tuteedelgado"})
+CREATE (u5:Usuario {id: 5, nombre: "gino.ceccarelli"})
+
+// Crear publicaciones
+CREATE (p1:Publicacion {id: 1, imagen: "https://upload.wikimedia.org/wikipedia/commons/9/96/Barbados_beach.jpg", descripcion: "Vacaciones en la playa"})
+CREATE (p2:Publicacion {id: 2, imagen: "https://hips.hearstapps.com/hmg-prod/images/ghk090121savorfeature-005-1658424349.jpg?crop=0.974xw:0.652xh;0.0256xw,0.166xh&resize=640:*", descripcion: "Comida deliciosa"})
+CREATE (p3:Publicacion {id: 3, imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Recreational-fishing-colombia.jpg", descripcion: "Día de pesca!"})
+
+// Crear hashtags
+CREATE (h1:Hashtag {id: 1, descripcion: "Playa"})
+CREATE (h2:Hashtag {id: 2, descripcion: "Comida"})
+CREATE (h3:Hashtag {id: 3, descripcion: "Pesca"})
+
+// Relacionar usuarios con publicaciones (SUBIO)
+MATCH (u:Usuario {id: 1})
+MATCH (p:Publicacion {id: 1})
+CREATE (u)-[:TIENE]->(p)
+
+MATCH (u:Usuario {id: 2})
+MATCH (p:Publicacion {id: 2})
+CREATE (u)-[:TIENE]->(p)
+
+MATCH (u:Usuario {id: 3})
+MATCH (p:Publicacion {id: 3})
+CREATE (u)-[:TIENE]->(p)
+
+// Relacionar publicaciones con hashtags
+MATCH (p1:Publicacion {id: 1})
+MATCH (h1:Hashtag {id: 1})
+MATCH (p2:Publicacion {id: 2})
+MATCH (h2:Hashtag {id: 2})
+MATCH (p3:Publicacion {id: 3})
+MATCH (h3:Hashtag {id: 3})
+
+CREATE (p1)-[:TIENE_HASHTAG]->(h1)
+CREATE (p2)-[:TIENE_HASHTAG]->(h2)
+CREATE (p3)-[:TIENE_HASHTAG]->(h3)
+
+// Likes de usuarios a publicaciones
+MATCH (u:Usuario {id: 1})
+MATCH (p:Publicacion {id: 3})
+MATCH (u2:Usuario {id: 2})
+MATCH (p2:Publicacion {id: 1})
+MATCH (u3:Usuario {id: 3})
+MATCH (p3:Publicacion {id: 2})
+CREATE (u)-[:LIKE]->(p)
+CREATE (u2)-[:LIKE]->(p2)
+CREATE (u3)-[:LIKE]->(p3)
+
+// Seguidores
+MATCH (u1:Usuario {id: 1}) MATCH(u2:Usuario {id: 2})
+MATCH (u3:Usuario {id: 3}) MATCH(u1:Usuario {id: 1})
+
+CREATE (u1)-[:SIGUE]->(u2)
+CREATE (u3)-[:SIGUE]->(u1)
