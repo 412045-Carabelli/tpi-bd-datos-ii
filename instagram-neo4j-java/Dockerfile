@@ -2,6 +2,6 @@ FROM openjdk:17-jdk-slim
 
 VOLUME /tmp
 
-COPY target/social-media-app-1.0.0.jar app.jar
+COPY target/instagram-neo4j-java app.jar
 
 ENTRYPOINT ["java","-jar","/app.jar"]
