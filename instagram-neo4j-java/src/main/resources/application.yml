@@ -1,0 +1,16 @@
+spring:
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: password
+  application:
+    name: social-media-app
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.datosii.tpidatosii : DEBUG
+    org.springframework.data.neo4j: DEBUG

@@ -1,0 +1,42 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  neo4j:
+    image: neo4j:5
+    container_name: social-media-neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: neo4j/password
+      NEO4J_PLUGINS: '["apoc"]'
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      - neo4j_import:/import
+      - neo4j_plugins:/plugins
+    networks:
+      - social-media-network
+
+  app:
+    build: .
+    container_name: social-media-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - neo4j
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    networks:
+      - social-media-network
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  neo4j_import:
+  neo4j_plugins:
+
+networks:
+  social-media-network:
+    driver: bridge
